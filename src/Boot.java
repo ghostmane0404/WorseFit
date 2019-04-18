@@ -1,30 +1,50 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Boot {
 
     public static void main(String[] args) {
-        int ramBlocks;
-        int choose;
+        int ramBlocks = 0;
+        int choose=0;
         Scanner scanner = new Scanner(System.in);
-
-        exit_loop:System.out.println("Введите количество блоков в RAM: ");
-        ramBlocks= scanner.nextInt();
+        System.out.println("Введите количество блоков в RAM: ");
+        try {
+            exit_loop:
+            ramBlocks = scanner.nextInt();
+        }
+        catch (InputMismatchException exception)
+        {
+            System.out.println("Thing what you had just wrote is not a number");
+            return;
+        }
         int  [] ram =  new int [ramBlocks];
         String[] planner = new String [ramBlocks];
         ArrayList <Operation> operation =  new ArrayList<>();
-        for(int i =0;i<ramBlocks;i++)
+        try {
+            for (int i = 0; i < ramBlocks; i++) {
+                System.out.println("Введите количество памяти для блока " + i + " в Кb");
+                ram[i] = scanner.nextInt();
+                planner[i] = "Пусто";
+            }
+        }catch (InputMismatchException exception)
         {
-            System.out.println("Введите количество памяти для блока "+ i + " в Кb");
-            ram[i]=scanner.nextInt();
-            planner[i]="Пусто";
+            System.out.println("Thing what you had just wrote is not a number");
+            return;
         }
         while(true)
         {
-            System.out.println("1-Create new Process"+'\n'+"2-Delete/Stop Process"+'\n'+
-                   "3-Show ram status"+'\n'+"4-Exit Programm");
-            choose = scanner.nextInt();
+            try{
+                System.out.println("1-Create new Process"+'\n'+"2-Delete/Stop Process"+'\n'+
+                        "3-Show ram status"+'\n'+"4-Exit Programm");
+                choose = scanner.nextInt();
+            }
+            catch (InputMismatchException exception)
+            {
+                System.out.println("Thing what you had just wrote is not a number");
+
+            }
             boolean DobbieIsFree= true;
             switch (choose)
             {
@@ -34,8 +54,16 @@ public class Boot {
                     System.out.println("Name your operation: ");
                     String name = scanner.next();
                     example.setName(name);
-                    System.out.println("What size does your operation have?: ");
-                    int size=scanner.nextInt();
+                    int size = 0;
+                    try {
+                        System.out.println("What size does your operation have?: ");
+                         size= scanner.nextInt();
+                    }
+                    catch (InputMismatchException exception)
+                    {
+                        System.out.println("Thing what you had just wrote is not a number");
+                        return;
+                    }
                     example.setSize(size);
 
                     //Worse Fit Algorithm
