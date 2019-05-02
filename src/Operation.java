@@ -2,6 +2,15 @@ public class Operation {
 
     private String name;
     private  int size;
+    private int unique;
+
+    public void setUnique(int unique) {
+        this.unique = unique;
+    }
+
+    public int getUnique() {
+        return unique;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -18,13 +27,5 @@ public class Operation {
     public int getSize() {
         return size;
     }
-    private int number;
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
 }
